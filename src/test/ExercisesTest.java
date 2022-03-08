@@ -16,10 +16,11 @@ public class ExercisesTest {
     private static final String LOG_FILE_PATH = "src/test/test_logs.txt";
     private static File TEST_LOG_FILE = new File(LOG_FILE_PATH);
     private RandomTestingFramework rtf = new RandomTestingFramework(NUM_TEST_CASES);
+    private PairwiseTestingFramework ptf = new PairwiseTestingFramework();
 
 
     @Test
-    public void testBinarySearch() {
+    public void testMemberOfUnsorted() {
         for (int i = 0; i < rtf.randomArrays.length; i++) {
             boolean oracleAnswer = testOracle(rtf.randomArrays[i], rtf.randomKeys[i]);
             System.out.println(oracleAnswer);
@@ -77,4 +78,27 @@ public class ExercisesTest {
         }
     }
 
-}
+    private class PairwiseTestingFramework {
+        private int[][] typicalValues;
+        private int[] defaultValues;
+        private static final int k = 2;
+
+        /* Typical_1 = [0,1], Typical_2 = [5,6], Typical_3 = [10,11] etc.
+        * Default_1 = 0, Default_2 = 5, Default_3 = 10 etc.*/
+        // Typical_key  =
+        private PairwiseTestingFramework() {
+            typicalValues = new int[N][k];
+            defaultValues = new int[N];
+            for (int i = 0; i < N; i++) {
+                defaultValues[i] = 5*i;
+                for (int j = 0; j < k; j++) {
+                    typicalValues[i][j] = 5*i + j;
+                    System.out.printf("i: %d  j: %d ==> %d \n",i,j,typicalValues[i][j]);
+                }
+            }
+        }
+
+    }
+
+
+    }
